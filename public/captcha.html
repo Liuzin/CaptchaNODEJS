@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>Капча</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Ekaterina Tupii">
+    <link href="http://Liuzin.96.lt/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<link href="http://Liuzin.96.lt/js/bootstrap.min.css" rel="stylesheet">
+</head>
+	<script>
+	$(document).ready(function(){
+		$("#back").submit(function(){
+			event.preventDefault();
+		})
+		$("#check").click(function(){
+			var data = {
+				"src" : $("#suspense").val()
+			};
+			$.ajax({
+				method: "POST",
+				url: "/captcha",
+				data: data
+			})
+			.success(function(result){
+				$("h1").html(result.answer);
+			})
+		})
+	})		
+	</script>
+</head>
+<body>
+
+<div class="col-lg-2" id="back">
+<div class="well">
+
+<img src="/captcha.png"><br>
+<br>
+<input class="form-control" placeholder="Введите ответ" id="suspense">
+<br>
+<h1></h1>
+<br>
+<button type="submit" class="btn btn-danger" id="check">Проверить</button>
+</div>
+</div>
+</body>
+</html>
